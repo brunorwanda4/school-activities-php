@@ -5,7 +5,7 @@ include_once('../backend/config.php');  // Include database connection
 
 // Ensure the user is a teacher
 if ($_SESSION['user_type'] !== 'teacher') {
-    header('Location: ../frontend/login.html');  // Redirect to login if not teacher
+    header('Location: ../backend/login.php');  // Redirect to login if not teacher
     exit();
 }
 

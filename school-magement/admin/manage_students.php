@@ -4,7 +4,7 @@ include_once('../backend/config.php'); // Include database connection
 
 // Ensure the user is an admin
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
-    header('Location: ../frontend/login.html'); // Redirect to login if not admin
+    header('Location: ../backend/login.php'); // Redirect to login if not admin
     exit();
 }
 
