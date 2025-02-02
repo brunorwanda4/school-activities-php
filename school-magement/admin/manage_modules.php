@@ -1,11 +1,11 @@
 <?php
 // admin/manage_modules.php
 session_start();
-include_once('../backend/config.php');  // Include database connection
+include_once('../backend/config.php'); // Include database connection
 
 // Ensure the user is an admin
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
-    header('Location: ../backend/login.php');  // Redirect to login if not admin
+    header('Location: ../backend/login.php'); // Redirect to login if not admin
     exit();
 }
 
@@ -79,6 +79,7 @@ $result = mysqli_query($karine_conn, "SELECT * FROM modules");
                     <th class="p-3 text-left">ID</th>
                     <th class="p-3 text-left">Module Name</th>
                     <th class="p-3 text-left">Description</th>
+                    <th class="p-3 text-left">Parent Module ID</th>
                     <th class="p-3 text-left">Active</th>
                     <th class="p-3 text-left">Actions</th>
                 </tr>
@@ -89,6 +90,7 @@ $result = mysqli_query($karine_conn, "SELECT * FROM modules");
                         <td class="p-3"><?php echo $row['id']; ?></td>
                         <td class="p-3"><?php echo $row['module_name']; ?></td>
                         <td class="p-3"><?php echo $row['description']; ?></td>
+                        <td class="p-3"><?php echo $row['parent_module_id'] ?? 'None'; ?></td>
                         <td class="p-3"><?php echo $row['is_active'] ? 'Yes' : 'No'; ?></td>
                         <td class="p-3">
                             <a href="?edit=<?php echo $row['id']; ?>" class="text-blue-500 hover:underline">Edit</a> | 
