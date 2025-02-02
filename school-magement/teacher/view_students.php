@@ -1,5 +1,4 @@
 <?php
-// teacher/view_students.php
 session_start();
 include_once('../backend/config.php');  // Include database connection
 
@@ -26,52 +25,69 @@ if (isset($_GET['student_id'])) {
     $student_info = mysqli_fetch_assoc(mysqli_query($karine_conn, "SELECT * FROM students WHERE student_id = '$student_id'"));
 }
 ?>
-    <a href="../backend/login.php">logout</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Students</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-red-600">View Students</h1>
+            <a href="../backend/login.php" class="text-red-500 hover:underline">Logout</a>
+        </div>
 
-<h1>View Students</h1>
-
-<!-- List of Students -->
-<table class="table-auto border-collapse border border-gray-200 mb-6">
-    <thead>
-        <tr>
-            <th class="border px-4 py-2">Student Name</th>
-            <th class="border px-4 py-2">Class</th>
-            <th class="border px-4 py-2">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php while ($student = mysqli_fetch_assoc($students_result)) { ?>
-            <tr>
-                <td class="border px-4 py-2"><?php echo $student['name']; ?></td>
-                <td class="border px-4 py-2"><?php echo $student['class']; ?></td>
-                <td class="border px-4 py-2">
-                    <a href="?student_id=<?php echo $student['student_id']; ?>" class="bg-blue-500 text-white px-4 py-2">View Marks</a>
-                </td>
-            </tr>
-        <?php } ?>
-    </tbody>
-</table>
-
-<?php if (isset($marks_result)) { ?>
-
-    <h2>Marks for <?php echo $student_info['name']; ?></h2>
-    <table class="table-auto border-collapse border border-gray-200 mb-6">
-        <thead>
-            <tr>
-                <th class="border px-4 py-2">Subject</th>
-                <th class="border px-4 py-2">Marks</th>
-                <th class="border px-4 py-2">Entry Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($mark = mysqli_fetch_assoc($marks_result)) { ?>
-                <tr>
-                    <td class="border px-4 py-2"><?php echo $mark['subject']; ?></td>
-                    <td class="border px-4 py-2"><?php echo $mark['marks']; ?></td>
-                    <td class="border px-4 py-2"><?php echo $mark['entry_date']; ?></td>
+        <!-- List of Students -->
+        <table class="w-full border-collapse bg-white shadow-md rounded-md">
+            <thead>
+                <tr class="bg-red-500 text-white">
+                    <th class="p-3 text-left">Student Name</th>
+                    <th class="p-3 text-left">Class</th>
+                    <th class="p-3 text-left">Actions</th>
                 </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php while ($student = mysqli_fetch_assoc($students_result)) { ?>
+                    <tr class="border-b">
+                        <td class="p-3"> <?php echo $student['name']; ?> </td>
+                        <td class="p-3"> <?php echo $student['class']; ?> </td>
+                        <td class="p-3">
+                            <a href="?student_id=<?php echo $student['student_id']; ?>" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">View Marks</a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
 
-<?php } ?>
+        <?php if (isset($marks_result)) { ?>
+            <div class="mt-6">
+                <h2 class="text-lg font-semibold text-gray-700 mb-3">Marks for <?php echo $student_info['name']; ?></h2>
+                <table class="w-full border-collapse bg-white shadow-md rounded-md">
+                    <thead>
+                        <tr class="bg-red-500 text-white">
+                            <th class="p-3 text-left">Subject</th>
+                            <th class="p-3 text-left">Marks</th>
+                            <th class="p-3 text-left">Entry Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($mark = mysqli_fetch_assoc($marks_result)) { ?>
+                            <tr class="border-b">
+                                <td class="p-3"> <?php echo $mark['subject']; ?> </td>
+                                <td class="p-3"> <?php echo $mark['marks']; ?> </td>
+                                <td class="p-3"> <?php echo $mark['entry_date']; ?> </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php } ?>
+        <div class="mt-6 text-center">
+            <a href="dashboard.php" class="text-gray-600 hover:text-red-500 font-semibold">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>
