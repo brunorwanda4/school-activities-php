@@ -8,6 +8,7 @@ if ($_SESSION['user_type'] !== 'admin') {
     header('Location: ../backend/login.php');  // Redirect to login if not admin
     exit();
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
