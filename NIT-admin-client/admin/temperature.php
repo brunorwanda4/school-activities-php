@@ -14,13 +14,12 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$user_id = $_SESSION['user_id']; // Safe access after check
-
 // Handle Add Temperature Data
 if (isset($_POST['add_temperature'])) {
     $data_point = mysqli_real_escape_string($ineza_conn, $_POST['data_point']);
     $temperature = mysqli_real_escape_string($ineza_conn, $_POST['temperature']);
     $humidity = mysqli_real_escape_string($ineza_conn, $_POST['humidity']);
+    $user_id = mysqli_real_escape_string($ineza_conn,$_POST["user_id"]);
 
     $sql = "INSERT INTO ineza_tbltemperature (data_point, temperature, humidity, user_id) 
             VALUES ('$data_point', '$temperature', '$humidity', '$user_id')";
@@ -37,9 +36,10 @@ if (isset($_POST['edit_temperature'])) {
     $data_point = mysqli_real_escape_string($ineza_conn, $_POST['data_point']);
     $temperature = mysqli_real_escape_string($ineza_conn, $_POST['temperature']);
     $humidity = mysqli_real_escape_string($ineza_conn, $_POST['humidity']);
+    $user_id = mysqli_real_escape_string($ineza_conn,$_POST["user_id"]);
 
     $sql = "UPDATE ineza_tbltemperature 
-            SET data_point = '$data_point', temperature = '$temperature', humidity = '$humidity' 
+            SET data_point = '$data_point', temperature = '$temperature', humidity = '$humidity' , user_id='$user_id'
             WHERE id = '$id'";
     if (mysqli_query($ineza_conn, $sql)) {
         echo "<script>alert('Temperature data updated successfully!'); window.location.href='temperature.php';</script>";
@@ -81,6 +81,7 @@ $temperature_data = mysqli_query($ineza_conn, "SELECT * FROM ineza_tbltemperatur
             <input type="text" name="data_point" placeholder="Data Point" required class="w-full border p-2 rounded">
             <input type="number" step="0.01" name="temperature" placeholder="Temperature (°C)" required class="w-full border p-2 rounded">
             <input type="number" step="0.01" name="humidity" placeholder="Humidity (%)" required class="w-full border p-2 rounded">
+            <input type="text" name="user_id" placeholder="user id" required class="w-full border p-2 rounded">
             <button type="submit" name="add_temperature" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition">Add Data</button>
         </form>
 
@@ -95,6 +96,7 @@ $temperature_data = mysqli_query($ineza_conn, "SELECT * FROM ineza_tbltemperatur
                 <input type="text" name="data_point" value="<?php echo $data['data_point']; ?>" required class="w-full border p-2 rounded">
                 <input type="number" step="0.01" name="temperature" value="<?php echo $data['temperature']; ?>" required class="w-full border p-2 rounded">
                 <input type="number" step="0.01" name="humidity" value="<?php echo $data['humidity']; ?>" required class="w-full border p-2 rounded">
+                <input type="text" name="user_id" placeholder="user id" required class="w-full border p-2 rounded">
                 <button type="submit" name="edit_temperature" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition">Update Data</button>
             </form>
         <?php endif; ?>

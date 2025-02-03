@@ -4,7 +4,7 @@ session_start();
 include_once('../backend/config.php'); 
 
 // Ensure the user is a student
-if ($_SESSION['user_type'] !== 'student') {
+if ($_SESSION['user_type'] !== 'user') {
     header('Location: ../backend/login.php');  
     exit();
 }

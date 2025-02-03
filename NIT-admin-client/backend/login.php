@@ -31,8 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (mysqli_num_rows($result) > 0) {
             $user = mysqli_fetch_assoc($result);
-            if (password_verify($password, $teacher['password'])) {
-                // Teacher login
+            if (password_verify($password, $user['password'])) {
                 $_SESSION['user_type'] = 'user';
                 $_SESSION['username'] = $username;
                 $_SESSION['user_id'] = $user['id'];
