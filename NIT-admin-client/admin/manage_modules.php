@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_module'])) {
 
     $sql = "INSERT INTO modules (module_name, description, parent_module_id, is_active) 
             VALUES ('$module_name', '$description', '$parent_module_id', '$is_active')";
-    mysqli_query($karine_conn, $sql);
+    mysqli_query($happy_conn, $sql);
 }
 
 // Handle Edit Module
@@ -31,19 +31,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_module'])) {
 
     $sql = "UPDATE modules SET module_name='$module_name', description='$description', 
             parent_module_id='$parent_module_id', is_active='$is_active' WHERE id='$id'";
-    mysqli_query($karine_conn, $sql);
+    mysqli_query($happy_conn, $sql);
 }
 
 // Handle Delete Module
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    mysqli_query($karine_conn, "DELETE FROM modules WHERE id='$id'");
+    mysqli_query($happy_conn, "DELETE FROM modules WHERE id='$id'");
     header("Location: manage_modules.php");
     exit();
 }
 
 // Fetch all modules
-$result = mysqli_query($karine_conn, "SELECT * FROM modules");
+$result = mysqli_query($happy_conn, "SELECT * FROM modules");
 ?>
 
 <!DOCTYPE html>
@@ -104,7 +104,7 @@ $result = mysqli_query($karine_conn, "SELECT * FROM modules");
         <!-- Edit Module Form -->
         <?php if (isset($_GET['edit'])) {
             $id = $_GET['edit'];
-            $module = mysqli_fetch_assoc(mysqli_query($karine_conn, "SELECT * FROM modules WHERE id='$id'"));
+            $module = mysqli_fetch_assoc(mysqli_query($happy_conn, "SELECT * FROM modules WHERE id='$id'"));
         ?>
             <form method="POST" class="space-y-4 mt-6">
                 <h2 class="text-lg font-semibold text-gray-700">Edit Module</h2>

@@ -6,9 +6,9 @@ include_once('../backend/config.php');  // Include database connection
 // Check if form data is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize and collect form data
-    $role = mysqli_real_escape_string($karine_conn, $_POST['role']);
-    $email = mysqli_real_escape_string($karine_conn, $_POST['email']);
-    $password = mysqli_real_escape_string($karine_conn, $_POST['password']);
+    $role = mysqli_real_escape_string($happy_conn, $_POST['role']);
+    $email = mysqli_real_escape_string($happy_conn, $_POST['email']);
+    $password = mysqli_real_escape_string($happy_conn, $_POST['password']);
 
     // Check if email already exists in the selected role table
     if ($role == 'admin') {
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql = "SELECT * FROM students WHERE student_id = '$email'";
     }
 
-    $result = mysqli_query($karine_conn, $sql);
+    $result = mysqli_query($happy_conn, $sql);
 
     // If email exists, redirect to the appropriate dashboard
     if (mysqli_num_rows($result) > 0) {
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $sql = "INSERT INTO students (student_id, password) VALUES ('$email', '$hashed_password')";
         }
 
-        if (mysqli_query($karine_conn, $sql)) {
+        if (mysqli_query($happy_conn, $sql)) {
             // Redirect to the respective dashboard after registration
             $_SESSION['role'] = $role;
             $_SESSION['email'] = $email;
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             exit();
         } else {
-            echo "Error: " . mysqli_error($karine_conn);
+            echo "Error: " . mysqli_error($happy_conn);
         }
     }
 }

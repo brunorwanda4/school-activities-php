@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_student'])) {
 
     $sql = "INSERT INTO students (name, student_id, class, other_details, password) 
             VALUES ('$name', '$student_id', '$class', '$other_details', '$password')";
-    mysqli_query($karine_conn, $sql);
+    mysqli_query($happy_conn, $sql);
 }
 
 // Handle Edit Student
@@ -37,19 +37,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_student'])) {
         $sql = "UPDATE students SET name='$name', student_id='$student_id', class='$class', 
                 other_details='$other_details' WHERE id='$id'";
     }
-    mysqli_query($karine_conn, $sql);
+    mysqli_query($happy_conn, $sql);
 }
 
 // Handle Delete Student
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    mysqli_query($karine_conn, "DELETE FROM students WHERE id='$id'");
+    mysqli_query($happy_conn, "DELETE FROM students WHERE id='$id'");
     header("Location: manage_students.php");
     exit();
 }
 
 // Fetch all students
-$result = mysqli_query($karine_conn, "SELECT * FROM students");
+$result = mysqli_query($happy_conn, "SELECT * FROM students");
 ?>
 
 <!DOCTYPE html>
@@ -106,7 +106,7 @@ $result = mysqli_query($karine_conn, "SELECT * FROM students");
         <!-- Edit Student Form -->
         <?php if (isset($_GET['edit'])) {
             $id = $_GET['edit'];
-            $student = mysqli_fetch_assoc(mysqli_query($karine_conn, "SELECT * FROM students WHERE id='$id'"));
+            $student = mysqli_fetch_assoc(mysqli_query($happy_conn, "SELECT * FROM students WHERE id='$id'"));
         ?>
             <form method="POST" class="space-y-4 mt-6">
                 <h2 class="text-lg font-semibold text-gray-700">Edit Student</h2>

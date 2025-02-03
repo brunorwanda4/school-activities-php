@@ -1,8 +1,8 @@
 <!-- backend/db_connection.php -->
 <?php
-$karine_conn = mysqli_connect("localhost", "root", "", "happy_conn");
+$ineza_con = mysqli_connect("localhost", "root", "", "ineza_nit");
 
-if (!$karine_conn) {
+if (!$ineza_con) {
     die("Connection failed: " . mysqli_connect_error());
 }
 ?>

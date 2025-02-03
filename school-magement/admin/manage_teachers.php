@@ -16,7 +16,7 @@ if (isset($_POST['add_teacher'])) {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);  // Secure password hashing
 
     $sql = "INSERT INTO teachers (name, subject, username, password) VALUES ('$name', '$subject', '$username', '$password')";
-    mysqli_query($karine_conn, $sql);
+    mysqli_query($happy_conn, $sql);
 }
 
 // Handle Edit Teacher
@@ -33,17 +33,17 @@ if (isset($_POST['edit_teacher'])) {
     } else {
         $sql = "UPDATE teachers SET name = '$name', subject = '$subject', username = '$username' WHERE id = '$id'";
     }
-    mysqli_query($karine_conn, $sql);
+    mysqli_query($happy_conn, $sql);
 }
 
 // Handle Delete Teacher
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    mysqli_query($karine_conn, "DELETE FROM teachers WHERE id = '$id'");
+    mysqli_query($happy_conn, "DELETE FROM teachers WHERE id = '$id'");
 }
 
 // Fetch all teachers
-$teachers = mysqli_query($karine_conn, "SELECT * FROM teachers");
+$teachers = mysqli_query($happy_conn, "SELECT * FROM teachers");
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +71,7 @@ $teachers = mysqli_query($karine_conn, "SELECT * FROM teachers");
         <!-- Edit Teacher Form (if edit is triggered) -->
         <?php if (isset($_GET['edit'])): 
             $id = $_GET['edit'];
-            $teacher = mysqli_fetch_assoc(mysqli_query($karine_conn, "SELECT * FROM teachers WHERE id = '$id'"));
+            $teacher = mysqli_fetch_assoc(mysqli_query($happy_conn, "SELECT * FROM teachers WHERE id = '$id'"));
         ?>
         <form method="POST" class="mt-6 space-y-4">
             <h2 class="text-xl font-semibold text-gray-700">Edit Teacher</h2>

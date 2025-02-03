@@ -7,10 +7,10 @@ $password = "";            // Database password (leave empty for local or provid
 $dbname = "ineza_nit"; // Your database name (should match the one you've created)
 
 // Create connection
-$karine_conn = mysqli_connect($servername, $username, $password, $dbname);
+$happy_conn = mysqli_connect($servername, $username, $password, $dbname);
 
 // Check connection
-if (!$karine_conn) {
+if (!$happy_conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 ?>
