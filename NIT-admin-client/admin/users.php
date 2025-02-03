@@ -76,9 +76,9 @@ $users = mysqli_query($ineza_conn, "SELECT * FROM ineza_tblusers");
         <!-- Add Teacher Form -->
         <form method="POST" class="space-y-4">
             <h2 class="text-xl font-semibold text-gray-700">Add New user</h2>
-            <input type="text" name="username" placeholder="Username" requiblue class="w-full border p-2 rounded">
-            <input type="email" name="email" placeholder="Email" requiblue class="w-full border p-2 rounded">
-            <input type="password" name="password" placeholder="Password" requiblue class="w-full border p-2 rounded">
+            <input type="text" name="username" placeholder="Username" required class="w-full border p-2 rounded">
+            <input type="email" name="email" placeholder="Email" required class="w-full border p-2 rounded">
+            <input type="password" name="password" placeholder="Password" required class="w-full border p-2 rounded">
             <button type="submit" name="add_user" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition">Add user</button>
         </form>
 
@@ -90,8 +90,8 @@ $users = mysqli_query($ineza_conn, "SELECT * FROM ineza_tblusers");
             <form method="POST" class="mt-6 space-y-4">
                 <h2 class="text-xl font-semibold text-gray-700">Edit Teacher</h2>
                 <input type="hidden" name="id" value="<?php echo $teacher['id']; ?>">
-                <input type="text" name="username" value="<?php echo $teacher['username']; ?>" requiblue class="w-full border p-2 rounded">
-                <input type="email" name="email" value="<?php echo $teacher['email']; ?>" requiblue class="w-full border p-2 rounded">
+                <input type="text" name="username" value="<?php echo $teacher['username']; ?>" required class="w-full border p-2 rounded">
+                <input type="email" name="email" value="<?php echo $teacher['email']; ?>" required class="w-full border p-2 rounded">
                 <input type="password" name="password" placeholder="New Password (optional)" class="w-full border p-2 rounded">
                 <button type="submit" name="edit_user" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition">Update Teacher</button>
             </form>

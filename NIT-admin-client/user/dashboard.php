@@ -24,8 +24,13 @@ if ($_SESSION['user_type'] !== 'user') {
         
         <ul class="mt-6 space-y-4">
             <li>
-                <a href="view_marks.php" class="block bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
-                    View Marks
+                <a href="temperature.php" class="block bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
+                    all temperature you add
+                </a>
+            </li>
+            <li>
+                <a href="add_temperature.php" class="block bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
+                    Add temperature
                 </a>
             </li>
         </ul>

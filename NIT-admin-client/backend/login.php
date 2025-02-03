@@ -60,24 +60,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">Login</h2>
 
         <?php if (isset($error_message)) { ?>
-            <p class="text-blue-500 text-center mb-4"> <?php echo $error_message; ?> </p>
+            <p class="text-red-500 text-center mb-4"> <?php echo $error_message; ?> </p>
         <?php } ?>
 
         <form action="login.php" method="POST" class="space-y-4">
             <div>
                 <label for="role" class="block text-gray-600 font-medium">Select Role:</label>
-                <select name="role" requiblue class="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
+                <select name="role" required class="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
                     <option value="" disabled selected>Select your role</option>
                     <option value="user">User</option>
                     <option value="admin">Admin</option>
                 </select>
             </div>
             <div>
-                <input type="text" name="username" placeholder="Username" requiblue
+                <input type="text" name="username" placeholder="Username" required
                     class="w-full p-2 border rounded-md focus:ring focus:ring-blue-300" />
             </div>
             <div>
-                <input type="password" name="password" placeholder="Password" requiblue
+                <input type="password" name="password" placeholder="Password" required
                     class="w-full p-2 border rounded-md focus:ring focus:ring-blue-300" />
             </div>
             <button type="submit"

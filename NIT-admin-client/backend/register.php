@@ -67,24 +67,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form action="register.php" method="POST" class="space-y-4">
             <div>
                 <label for="role" class="block text-gray-600 font-medium">Select Role:</label>
-                <select name="role" requiblue class="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
+                <select name="role" required class="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
                     <option value="admin">Admin</option>
                     <option value="user">User</option>
                 </select>
             </div>
             <div>
                 <label for="username" class="block text-gray-600 font-medium">Username:</label>
-                <input type="text" name="username" requiblue placeholder="Enter your username"
+                <input type="text" name="username" required placeholder="Enter your username"
                     class="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
             </div>
             <div>
                 <label for="email" class="block text-gray-600 font-medium">Email:</label>
-                <input type="email" name="email" requiblue placeholder="Enter your email"
+                <input type="email" name="email" required placeholder="Enter your email"
                     class="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
             </div>
             <div>
                 <label for="password" class="block text-gray-600 font-medium">Password:</label>
-                <input type="password" name="password" requiblue placeholder="Enter your password"
+                <input type="password" name="password" required placeholder="Enter your password"
                     class="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
             </div>
             <button type="submit"

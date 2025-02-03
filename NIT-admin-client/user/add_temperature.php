@@ -29,38 +29,6 @@ if (isset($_POST['add_temperature'])) {
         echo "<script>alert('Error adding temperature data: " . mysqli_error($ineza_conn) . "');</script>";
     }
 }
-
-// Handle Edit Temperature Data
-if (isset($_POST['edit_temperature'])) {
-    $id = mysqli_real_escape_string($ineza_conn, $_POST['id']);
-    $data_point = mysqli_real_escape_string($ineza_conn, $_POST['data_point']);
-    $temperature = mysqli_real_escape_string($ineza_conn, $_POST['temperature']);
-    $humidity = mysqli_real_escape_string($ineza_conn, $_POST['humidity']);
-    $user_id = mysqli_real_escape_string($ineza_conn,$_POST["user_id"]);
-
-    $sql = "UPDATE ineza_tbltemperature 
-            SET data_point = '$data_point', temperature = '$temperature', humidity = '$humidity' , user_id='$user_id'
-            WHERE id = '$id'";
-    if (mysqli_query($ineza_conn, $sql)) {
-        echo "<script>alert('Temperature data updated successfully!'); window.location.href='temperature.php';</script>";
-    } else {
-        echo "<script>alert('Error updating temperature data: " . mysqli_error($ineza_conn) . "');</script>";
-    }
-}
-
-// Handle Delete Temperature Data
-if (isset($_GET['delete'])) {
-    $id = mysqli_real_escape_string($ineza_conn, $_GET['delete']);
-    $sql = "DELETE FROM ineza_tbltemperature WHERE id = '$id'";
-    if (mysqli_query($ineza_conn, $sql)) {
-        echo "<script>alert('Temperature data deleted successfully!'); window.location.href='temperature.php';</script>";
-    } else {
-        echo "<script>alert('Error deleting temperature data: " . mysqli_error($ineza_conn) . "');</script>";
-    }
-}
-
-// Fetch all temperature data
-$temperature_data = mysqli_query($ineza_conn, "SELECT * FROM ineza_tbltemperature");
 ?>
 
 <!DOCTYPE html>
