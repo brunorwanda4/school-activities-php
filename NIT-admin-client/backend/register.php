@@ -7,55 +7,43 @@ include_once('../backend/config.php');  // Include database connection
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize and collect form data
     $role = mysqli_real_escape_string($ineza_conn, $_POST['role']);
+    $username = mysqli_real_escape_string($ineza_conn, $_POST['username']);
     $email = mysqli_real_escape_string($ineza_conn, $_POST['email']);
     $password = mysqli_real_escape_string($ineza_conn, $_POST['password']);
 
-    // Check if email already exists in the selected role table
+    // Check if email already exists in the appropriate table
     if ($role == 'admin') {
-        $sql = "SELECT * FROM admins WHERE username = '$email'";
-    } elseif ($role == 'teacher') {
-        $sql = "SELECT * FROM teachers WHERE username = '$email'";
-    } elseif ($role == 'student') {
-        $sql = "SELECT * FROM students WHERE student_id = '$email'";
+        $sql = "SELECT * FROM ineza_tbladmin WHERE email = '$email'";
+    } else { // user
+        $sql = "SELECT * FROM ineza_tblusers WHERE email = '$email'";
     }
 
     $result = mysqli_query($ineza_conn, $sql);
 
-    // If email exists, redirect to the appropriate dashboard
     if (mysqli_num_rows($result) > 0) {
-        // Start session and set role-based redirection
-        $_SESSION['role'] = $role;
-        $_SESSION['email'] = $email;
-        if ($role == 'admin') {
-            header('Location: ../admin/dashboard.php');
-        } elseif ($role == 'teacher') {
-            header('Location: ../teacher/dashboard.php');
-        } else {
-            header('Location: ../student/dashboard.php');
-        }
+        echo "<script>alert('Email already registered!'); window.location.href='register.php';</script>";
         exit();
     } else {
-        // If email does not exist, register the user
+        // Hash password
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
+        // Insert user based on role
         if ($role == 'admin') {
-            $sql = "INSERT INTO admins (username, password) VALUES ('$email', '$hashed_password')";
-        } elseif ($role == 'teacher') {
-            $sql = "INSERT INTO teachers (username, password) VALUES ('$email', '$hashed_password')";
-        } elseif ($role == 'student') {
-            $sql = "INSERT INTO students (student_id, password) VALUES ('$email', '$hashed_password')";
+            $sql = "INSERT INTO ineza_tbladmin (username, email, password) VALUES ('$username', '$email', '$hashed_password')";
+        } else { // user
+            $sql = "INSERT INTO ineza_tblusers (username, email, password) VALUES ('$username', '$email', '$hashed_password')";
         }
 
         if (mysqli_query($ineza_conn, $sql)) {
-            // Redirect to the respective dashboard after registration
             $_SESSION['role'] = $role;
             $_SESSION['email'] = $email;
+            $_SESSION['username'] = $username;
+
+            // Redirect based on role
             if ($role == 'admin') {
                 header('Location: ../admin/dashboard.php');
-            } elseif ($role == 'teacher') {
-                header('Location: ../teacher/dashboard.php');
             } else {
-                header('Location: ../student/dashboard.php');
+                header('Location: ../user/dashboard.php');
             }
             exit();
         } else {
@@ -64,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,20 +73,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </select>
             </div>
             <div>
+                <label for="username" class="block text-gray-600 font-medium">Username:</label>
+                <input type="text" name="username" required placeholder="Enter your username"
+                    class="w-full p-2 border rounded-md focus:ring focus:ring-red-300">
+            </div>
+            <div>
                 <label for="email" class="block text-gray-600 font-medium">Email:</label>
-                <input type="email" name="email" required placeholder="Enter your email" 
+                <input type="email" name="email" required placeholder="Enter your email"
                     class="w-full p-2 border rounded-md focus:ring focus:ring-red-300">
             </div>
             <div>
                 <label for="password" class="block text-gray-600 font-medium">Password:</label>
-                <input type="password" name="password" required placeholder="Enter your password" 
+                <input type="password" name="password" required placeholder="Enter your password"
                     class="w-full p-2 border rounded-md focus:ring focus:ring-red-300">
             </div>
-            <button type="submit" 
+            <button type="submit"
                 class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md transition">Register</button>
         </form>
         <p class="text-center text-gray-600 mt-4">
-            Already have an account? 
+            Already have an account?
             <a href="./login.php" class="text-red-500 hover:underline">Login</a>
         </p>
     </div>

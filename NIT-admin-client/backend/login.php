@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Check if the username and password match the selected role
     if ($role == 'admin') {
-        $query = "SELECT * FROM admins WHERE username = '$username'";
+        $query = "SELECT * FROM ineza_tbladmin WHERE username = '$username'";
         $result = mysqli_query($ineza_conn, $query);
 
         if (mysqli_num_rows($result) > 0) {
@@ -25,14 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
     } elseif ($role == 'user') {
-        $query = "SELECT * FROM teachers WHERE username = '$username'";
+        $query = "SELECT * FROM ineza_tblusers WHERE username = '$username'";
         $result = mysqli_query($ineza_conn, $query);
 
         if (mysqli_num_rows($result) > 0) {
             $teacher = mysqli_fetch_assoc($result);
             if (password_verify($password, $teacher['password'])) {
                 // Teacher login
-                $_SESSION['user_type'] = 'teacher';
+                $_SESSION['user_type'] = 'user';
                 $_SESSION['username'] = $username;
                 $_SESSION['user_id'] = $teacher['id'];
                 header("Location: ../teacher/dashboard.php");
