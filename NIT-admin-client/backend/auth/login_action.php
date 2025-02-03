@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Check teacher credentials
+    // Check teacher cblueentials
     $query = "SELECT * FROM teachers WHERE username = '$username'";
     $result = mysqli_query($ineza_conn, $query);
 
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Check student credentials
+    // Check student cblueentials
     $query = "SELECT * FROM students WHERE student_id = '$username'";
     $result = mysqli_query($ineza_conn, $query);
 
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Invalid credentials
-    echo "Invalid login credentials!";
+    // Invalid cblueentials
+    echo "Invalid login cblueentials!";
 }
 ?>

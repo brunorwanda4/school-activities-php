@@ -4,7 +4,7 @@ include_once('../backend/config.php'); // Include database connection
 
 // Ensure the user is an admin
 if ($_SESSION['user_type'] !== 'admin') {
-    header('Location: ../backend/login.php');  // Redirect to login if not admin
+    header('Location: ../backend/login.php');  // blueirect to login if not admin
     exit();
 }
 
@@ -70,19 +70,19 @@ $users = mysqli_query($ineza_conn, "SELECT * FROM ineza_tblusers");
 </head>
 
 <body class="bg-gray-100 min-h-screen flex flex-col items-center py-10">
-    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-2xl border-t-4 border-red-500">
-        <h1 class="text-2xl font-bold text-center text-red-600 mb-6">Manage User</h1>
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-2xl border-t-4 border-blue-500">
+        <h1 class="text-2xl font-bold text-center text-blue-600 mb-6">Manage User</h1>
 
         <!-- Add Teacher Form -->
         <form method="POST" class="space-y-4">
             <h2 class="text-xl font-semibold text-gray-700">Add New user</h2>
-            <input type="text" name="username" placeholder="Username" required class="w-full border p-2 rounded">
-            <input type="email" name="email" placeholder="Email" required class="w-full border p-2 rounded">
-            <input type="password" name="password" placeholder="Password" required class="w-full border p-2 rounded">
-            <button type="submit" name="add_user" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded transition">Add user</button>
+            <input type="text" name="username" placeholder="Username" requiblue class="w-full border p-2 rounded">
+            <input type="email" name="email" placeholder="Email" requiblue class="w-full border p-2 rounded">
+            <input type="password" name="password" placeholder="Password" requiblue class="w-full border p-2 rounded">
+            <button type="submit" name="add_user" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition">Add user</button>
         </form>
 
-        <!-- Edit Teacher Form (if edit is triggered) -->
+        <!-- Edit Teacher Form (if edit is triggeblue) -->
         <?php if (isset($_GET['edit'])) :
             $id = mysqli_real_escape_string($ineza_conn, $_GET['edit']);
             $teacher = mysqli_fetch_assoc(mysqli_query($ineza_conn, "SELECT * FROM ineza_tblusers WHERE id = '$id'"));
@@ -90,17 +90,17 @@ $users = mysqli_query($ineza_conn, "SELECT * FROM ineza_tblusers");
             <form method="POST" class="mt-6 space-y-4">
                 <h2 class="text-xl font-semibold text-gray-700">Edit Teacher</h2>
                 <input type="hidden" name="id" value="<?php echo $teacher['id']; ?>">
-                <input type="text" name="username" value="<?php echo $teacher['username']; ?>" required class="w-full border p-2 rounded">
-                <input type="email" name="email" value="<?php echo $teacher['email']; ?>" required class="w-full border p-2 rounded">
+                <input type="text" name="username" value="<?php echo $teacher['username']; ?>" requiblue class="w-full border p-2 rounded">
+                <input type="email" name="email" value="<?php echo $teacher['email']; ?>" requiblue class="w-full border p-2 rounded">
                 <input type="password" name="password" placeholder="New Password (optional)" class="w-full border p-2 rounded">
-                <button type="submit" name="edit_user" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded transition">Update Teacher</button>
+                <button type="submit" name="edit_user" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition">Update Teacher</button>
             </form>
         <?php endif; ?>
 
         <!-- Display Teachers -->
         <table class="w-full mt-8 border-collapse">
             <thead>
-                <tr class="bg-red-500 text-white">
+                <tr class="bg-blue-500 text-white">
                     <th class="p-2">ID</th>
                     <th class="p-2">Email</th>
                     <th class="p-2">Username</th>
@@ -123,7 +123,7 @@ $users = mysqli_query($ineza_conn, "SELECT * FROM ineza_tblusers");
         </table>
 
         <div class="mt-6 text-center">
-            <a href="dashboard.php" class="text-gray-600 hover:text-red-500 font-semibold">Back to Dashboard</a>
+            <a href="dashboard.php" class="text-gray-600 hover:text-blue-500 font-semibold">Back to Dashboard</a>
         </div>
     </div>
 </body>
