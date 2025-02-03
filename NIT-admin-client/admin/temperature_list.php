@@ -7,7 +7,16 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
     exit();
 }
 
+// Check if the connection is successful
+if (!$ineza_conn) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
+
+// Execute the query and check for errors
 $temperature_data = mysqli_query($ineza_conn, "SELECT * FROM ineza_tbltemperature");
+if (!$temperature_data) {
+    die("Query failed: " . mysqli_error($ineza_conn));
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +41,7 @@ $temperature_data = mysqli_query($ineza_conn, "SELECT * FROM ineza_tbltemperatur
                 <thead class="bg-blue-500 text-white">
                     <tr>
                         <th class="py-2 px-4">ID</th>
+                        <th class="py-2 px-4">User Id</th>
                         <th class="py-2 px-4">Data Point</th>
                         <th class="py-2 px-4">Temperature (°C)</th>
                         <th class="py-2 px-4">Humidity (%)</th>
@@ -42,6 +52,7 @@ $temperature_data = mysqli_query($ineza_conn, "SELECT * FROM ineza_tbltemperatur
                     <?php while ($row = mysqli_fetch_assoc($temperature_data)) : ?>
                         <tr class="hover:bg-gray-100">
                             <td class="py-2 px-4 text-center"><?= $row['id'] ?></td>
+                            <td class="py-2 px-4 text-center"><?= $row['user_id'] ?></td>
                             <td class="py-2 px-4"><?= $row['data_point'] ?></td>
                             <td class="py-2 px-4"><?= $row['temperature'] ?></td>
                             <td class="py-2 px-4"><?= $row['humidity'] ?></td>

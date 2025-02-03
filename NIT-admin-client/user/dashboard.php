@@ -23,8 +23,9 @@ $temperature_data = mysqli_query($ineza_conn, "SELECT * FROM ineza_tbltemperatur
     <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-4xl border-t-4 border-blue-500">
         <h1 class="text-2xl font-bold text-center text-blue-600 mb-6">Temperature Data</h1>
 
-        <div class="text-right mb-4">
+        <div class="text-right mb-4 flex gap-4">
             <a href="add_temperature.php" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded shadow">+ Add Temperature Data</a>
+            <a href="../backend/login.php" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md transition">Logout</a>
         </div>
 
         <div class="overflow-x-auto">
