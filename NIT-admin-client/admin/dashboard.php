@@ -22,9 +22,8 @@ if ($_SESSION['user_type'] !== 'admin') {
     <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg border-t-4 border-red-500">
         <h1 class="text-3xl font-bold text-center text-red-600 mb-6">Welcome, Admin!</h1>
         <ul class="space-y-4 text-center">
-            <li><a href="manage_students.php" class="text-red-500 hover:underline font-medium">Manage Students</a></li>
-            <li><a href="manage_teachers.php" class="text-red-500 hover:underline font-medium">Manage Teachers</a></li>
-            <li><a href="manage_modules.php" class="text-red-500 hover:underline font-medium">Manage Modules</a></li>
+            <li><a href="users.php" class="text-red-500 hover:underline font-medium">View all users</a></li>
+            <li><a href="temperature.php" class="text-red-500 hover:underline font-medium">view all temperature</a></li>
         </ul>
         <div class="mt-6 text-center">
             <a href="../backend/login.php" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md transition">Logout</a>

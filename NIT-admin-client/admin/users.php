@@ -11,11 +11,11 @@ if($_SESSION['user_type'] !== 'admin')  {
 // Handle Add Teacher
 if (isset($_POST['add_teacher'])) {
     $name = $_POST['name'];
-    $subject = $_POST['subject'];
+    $email = $_POST['email'];
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);  // Secure password hashing
 
-    $sql = "INSERT INTO teachers (name, subject, username, password) VALUES ('$name', '$subject', '$username', '$password')";
+    $sql = "INSERT INTO ineza_tblusers (name, email, username, password) VALUES ('$name', '$email', '$username', '$password')";
     mysqli_query($ineza_conn, $sql);
 }
 
@@ -23,15 +23,15 @@ if (isset($_POST['add_teacher'])) {
 if (isset($_POST['edit_teacher'])) {
     $id = $_POST['id'];
     $name = $_POST['name'];
-    $subject = $_POST['subject'];
+    $email = $_POST['email'];
     $username = $_POST['username'];
 
     // Update password only if a new one is provided
     if (!empty($_POST['password'])) {
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $sql = "UPDATE teachers SET name = '$name', subject = '$subject', username = '$username', password = '$password' WHERE id = '$id'";
+        $sql = "UPDATE ineza_tblusers SET name = '$name', email = '$email', username = '$username', password = '$password' WHERE id = '$id'";
     } else {
-        $sql = "UPDATE teachers SET name = '$name', subject = '$subject', username = '$username' WHERE id = '$id'";
+        $sql = "UPDATE ineza_tblusers SET name = '$name', email = '$email', username = '$username' WHERE id = '$id'";
     }
     mysqli_query($ineza_conn, $sql);
 }
@@ -43,7 +43,7 @@ if (isset($_GET['delete'])) {
 }
 
 // Fetch all teachers
-$teachers = mysqli_query($ineza_conn, "SELECT * FROM teachers");
+$users = mysqli_query($ineza_conn, "SELECT * FROM ineza_tblusers");
 ?>
 
 <!DOCTYPE html>
@@ -71,13 +71,12 @@ $teachers = mysqli_query($ineza_conn, "SELECT * FROM teachers");
         <!-- Edit Teacher Form (if edit is triggered) -->
         <?php if (isset($_GET['edit'])): 
             $id = $_GET['edit'];
-            $teacher = mysqli_fetch_assoc(mysqli_query($ineza_conn, "SELECT * FROM teachers WHERE id = '$id'"));
+            $teacher = mysqli_fetch_assoc(mysqli_query($ineza_conn, "SELECT * FROM ineza_tblusers WHERE id = '$id'"));
         ?>
         <form method="POST" class="mt-6 space-y-4">
             <h2 class="text-xl font-semibold text-gray-700">Edit Teacher</h2>
             <input type="hidden" name="id" value="<?php echo $teacher['id']; ?>">
             <input type="text" name="name" value="<?php echo $teacher['name']; ?>" required class="w-full border p-2 rounded">
-            <input type="text" name="subject" value="<?php echo $teacher['subject']; ?>" required class="w-full border p-2 rounded">
             <input type="text" name="username" value="<?php echo $teacher['username']; ?>" required class="w-full border p-2 rounded">
             <input type="password" name="password" placeholder="New Password (optional)" class="w-full border p-2 rounded">
             <button type="submit" name="edit_teacher" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded transition">Update Teacher</button>
@@ -90,7 +89,7 @@ $teachers = mysqli_query($ineza_conn, "SELECT * FROM teachers");
                 <tr class="bg-red-500 text-white">
                     <th class="p-2">ID</th>
                     <th class="p-2">Name</th>
-                    <th class="p-2">Subject</th>
+                    <th class="p-2">Email</th>
                     <th class="p-2">Username</th>
                     <th class="p-2">Actions</th>
                 </tr>
@@ -100,7 +99,7 @@ $teachers = mysqli_query($ineza_conn, "SELECT * FROM teachers");
                 <tr class="border-t">
                     <td class="p-2 text-center"><?php echo $row['id']; ?></td>
                     <td class="p-2"><?php echo $row['name']; ?></td>
-                    <td class="p-2"><?php echo $row['subject']; ?></td>
+                    <td class="p-2"><?php echo $row['email']; ?></td>
                     <td class="p-2"><?php echo $row['username']; ?></td>
                     <td class="p-2 text-center">
                         <a href="?edit=<?php echo $row['id']; ?>" class="text-blue-500 hover:underline">Edit</a> |
