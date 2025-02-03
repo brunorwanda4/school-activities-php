@@ -11,7 +11,7 @@ if ($_SESSION['user_type'] !== 'student') {
 
 // Fetch marks for the student
 $sql = "SELECT * FROM marks WHERE student_id = '{$_SESSION['student_id']}'";
-$result = mysqli_query($happy_conn, $sql);
+$result = mysqli_query($ineza_conn, $sql);
 ?>
 
 <!DOCTYPE html>

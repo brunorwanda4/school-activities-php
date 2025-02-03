@@ -13,7 +13,7 @@ $teacher_id = $_SESSION['user_id'];
 
 // Fetch all students for the teacher to view
 $sql = "SELECT * FROM students";
-$students_result = mysqli_query($happy_conn, $sql);
+$students_result = mysqli_query($ineza_conn, $sql);
 
 // View Marks for a specific student
 if (isset($_GET['student_id'])) {
@@ -21,8 +21,8 @@ if (isset($_GET['student_id'])) {
 
     // Fetch marks for the selected student
     $marks_sql = "SELECT * FROM marks WHERE student_id = '$student_id' AND teacher_id = '$teacher_id'";
-    $marks_result = mysqli_query($happy_conn, $marks_sql);
-    $student_info = mysqli_fetch_assoc(mysqli_query($happy_conn, "SELECT * FROM students WHERE student_id = '$student_id'"));
+    $marks_result = mysqli_query($ineza_conn, $marks_sql);
+    $student_info = mysqli_fetch_assoc(mysqli_query($ineza_conn, "SELECT * FROM students WHERE student_id = '$student_id'"));
 }
 ?>
 <!DOCTYPE html>

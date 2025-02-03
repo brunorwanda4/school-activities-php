@@ -17,20 +17,20 @@ if (isset($_POST['add_marks'])) {
     $teacher_id = $_SESSION['user_id'];
 
     $sql = "INSERT INTO marks (student_id, subject, marks, teacher_id) VALUES ('$student_id', '$subject', '$marks', '$teacher_id')";
-    if (mysqli_query($happy_conn, $sql)) {
+    if (mysqli_query($ineza_conn, $sql)) {
         echo "<p class='text-green-500'>Marks added successfully!</p>";
     } else {
-        echo "<p class='text-red-500'>Error: " . mysqli_error($happy_conn) . "</p>";
+        echo "<p class='text-red-500'>Error: " . mysqli_error($ineza_conn) . "</p>";
     }
 }
 
 // Fetch all students for viewing
 $sql = "SELECT * FROM students";
-$result = mysqli_query($happy_conn, $sql);
+$result = mysqli_query($ineza_conn, $sql);
 
 // Fetch marks for the teacher
 $sql_marks = "SELECT * FROM marks WHERE teacher_id = '{$_SESSION['user_id']}'";
-$result_marks = mysqli_query($happy_conn, $sql_marks);
+$result_marks = mysqli_query($ineza_conn, $sql_marks);
 ?>
 
 <!DOCTYPE html>

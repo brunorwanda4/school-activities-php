@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Check if the username and password match the selected role
     if ($role == 'admin') {
         $query = "SELECT * FROM admins WHERE username = '$username'";
-        $result = mysqli_query($happy_conn, $query);
+        $result = mysqli_query($ineza_conn, $query);
 
         if (mysqli_num_rows($result) > 0) {
             $user = mysqli_fetch_assoc($result);
@@ -24,9 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 exit();
             }
         }
-    } elseif ($role == 'teacher') {
+    } elseif ($role == 'user') {
         $query = "SELECT * FROM teachers WHERE username = '$username'";
-        $result = mysqli_query($happy_conn, $query);
+        $result = mysqli_query($ineza_conn, $query);
 
         if (mysqli_num_rows($result) > 0) {
             $teacher = mysqli_fetch_assoc($result);
@@ -36,20 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['username'] = $username;
                 $_SESSION['user_id'] = $teacher['id'];
                 header("Location: ../teacher/dashboard.php");
-                exit();
-            }
-        }
-    } elseif ($role == 'student') {
-        $query = "SELECT * FROM students WHERE student_id = '$username'";
-        $result = mysqli_query($happy_conn, $query);
-
-        if (mysqli_num_rows($result) > 0) {
-            $user = mysqli_fetch_assoc($result);
-            if (password_verify($password, $user['password'])) {
-                // Student login
-                $_SESSION['user_type'] = 'student';
-                $_SESSION['student_id'] = $username;
-                header("Location: ../student/dashboard.php");
                 exit();
             }
         }
@@ -80,9 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="role" class="block text-gray-600 font-medium">Select Role:</label>
                 <select name="role" required class="w-full p-2 border rounded-md focus:ring focus:ring-red-300">
                     <option value="" disabled selected>Select your role</option>
+                    <option value="user">User</option>
                     <option value="admin">Admin</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="student">Student</option>
                 </select>
             </div>
             <div>
