@@ -1,32 +1,27 @@
 <?php
 session_start();
-include_once('../backend/config.php'); // Include database connection
+include_once('../backend/config.php');
 
-// Ensure the user is logged in (admin or regular user)
-if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
-    header('Location: ../backend/login.php');  // Redirect to login if not logged in
+if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'user') {
+    header('Location: ../backend/login.php');
     exit();
 }
 
-// Check if user_id is set in session
-if (!isset($_SESSION['user_id'])) {
-    echo "<script>alert('User session not found. Please log in again.'); window.location='../backend/login.php';</script>";
-    exit();
-}
-
-// Handle Add Temperature Data
-if (isset($_POST['add_temperature'])) {
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data_point = mysqli_real_escape_string($ineza_conn, $_POST['data_point']);
     $temperature = mysqli_real_escape_string($ineza_conn, $_POST['temperature']);
     $humidity = mysqli_real_escape_string($ineza_conn, $_POST['humidity']);
-    $user_id = mysqli_real_escape_string($ineza_conn,$_POST["user_id"]);
+    $user_id = $_SESSION['user_id']; // Fetch logged-in user ID
 
+    // Insert data into database
     $sql = "INSERT INTO ineza_tbltemperature (data_point, temperature, humidity, user_id) 
             VALUES ('$data_point', '$temperature', '$humidity', '$user_id')";
+    
     if (mysqli_query($ineza_conn, $sql)) {
-        echo "<script>alert('Temperature data added successfully!'); window.location.href='temperature.php';</script>";
+        $success_message = "Temperature data added successfully!";
     } else {
-        echo "<script>alert('Error adding temperature data: " . mysqli_error($ineza_conn) . "');</script>";
+        $error_message = "Error: " . mysqli_error($ineza_conn);
     }
 }
 ?>
@@ -36,71 +31,47 @@ if (isset($_POST['add_temperature'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Temperature Data</title>
+    <title>Add Temperature Data</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col items-center py-10">
-    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-2xl border-t-4 border-blue-500">
-        <h1 class="text-2xl font-bold text-center text-blue-600 mb-6">Manage Temperature Data</h1>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center py-10">
 
-        <!-- Add Temperature Data Form -->
-        <form method="POST" class="space-y-4">
-            <h2 class="text-xl font-semibold text-gray-700">Add New Temperature Data</h2>
-            <input type="text" name="data_point" placeholder="Data Point" required class="w-full border p-2 rounded">
-            <input type="number" step="0.01" name="temperature" placeholder="Temperature (°C)" required class="w-full border p-2 rounded">
-            <input type="number" step="0.01" name="humidity" placeholder="Humidity (%)" required class="w-full border p-2 rounded">
-            <input type="text" name="user_id" placeholder="user id" required class="w-full border p-2 rounded">
-            <button type="submit" name="add_temperature" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition">Add Data</button>
-        </form>
+    <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-lg border-t-4 border-blue-500">
+        <h1 class="text-2xl font-bold text-center text-blue-600 mb-6">Add Temperature Data</h1>
 
-        <!-- Edit Temperature Data Form (if edit is triggered) -->
-        <?php if (isset($_GET['edit'])) :
-            $id = mysqli_real_escape_string($ineza_conn, $_GET['edit']);
-            $data = mysqli_fetch_assoc(mysqli_query($ineza_conn, "SELECT * FROM ineza_tbltemperature WHERE id = '$id'"));
-        ?>
-            <form method="POST" class="mt-6 space-y-4">
-                <h2 class="text-xl font-semibold text-gray-700">Edit Temperature Data</h2>
-                <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
-                <input type="text" name="data_point" value="<?php echo $data['data_point']; ?>" required class="w-full border p-2 rounded">
-                <input type="number" step="0.01" name="temperature" value="<?php echo $data['temperature']; ?>" required class="w-full border p-2 rounded">
-                <input type="number" step="0.01" name="humidity" value="<?php echo $data['humidity']; ?>" required class="w-full border p-2 rounded">
-                <input type="text" name="user_id" placeholder="user id" required class="w-full border p-2 rounded">
-                <button type="submit" name="edit_temperature" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition">Update Data</button>
-            </form>
+        <?php if (isset($success_message)) : ?>
+            <p class="text-green-600 text-center mb-4"><?= $success_message ?></p>
         <?php endif; ?>
 
-        <!-- Display Temperature Data -->
-        <table class="w-full mt-8 border-collapse">
-            <thead>
-                <tr class="bg-blue-500 text-white">
-                    <th class="p-2">ID</th>
-                    <th class="p-2">Data Point</th>
-                    <th class="p-2">Temperature (°C)</th>
-                    <th class="p-2">Humidity (%)</th>
-                    <th class="p-2">Timestamp</th>
-                    <th class="p-2">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = mysqli_fetch_assoc($temperature_data)) : ?>
-                    <tr class="border-t">
-                        <td class="p-2 text-center"><?php echo $row['id']; ?></td>
-                        <td class="p-2"><?php echo $row['data_point']; ?></td>
-                        <td class="p-2"><?php echo $row['temperature']; ?></td>
-                        <td class="p-2"><?php echo $row['humidity']; ?></td>
-                        <td class="p-2"><?php echo $row['timestamp']; ?></td>
-                        <td class="p-2 text-center">
-                            <a href="?edit=<?php echo $row['id']; ?>" class="text-blue-500 hover:underline">Edit</a> |
-                            <a href="?delete=<?php echo $row['id']; ?>" class="text-red-500 hover:underline" onclick="return confirm('Are you sure you want to delete this data?');">Delete</a>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
+        <?php if (isset($error_message)) : ?>
+            <p class="text-red-600 text-center mb-4"><?= $error_message ?></p>
+        <?php endif; ?>
+
+        <form method="POST" class="space-y-4">
+            <div>
+                <label class="block text-gray-700 font-semibold">Data Point</label>
+                <input type="text" name="data_point" required class="w-full border p-2 rounded">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-semibold">Temperature (°C)</label>
+                <input type="number" step="0.01" name="temperature" required class="w-full border p-2 rounded">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-semibold">Humidity (%)</label>
+                <input type="number" step="0.01" name="humidity" required class="w-full border p-2 rounded">
+            </div>
+
+            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition">
+                Add Data
+            </button>
+        </form>
 
         <div class="mt-6 text-center">
             <a href="dashboard.php" class="text-gray-600 hover:text-blue-500 font-semibold">Back to Dashboard</a>
         </div>
     </div>
+
 </body>
 </html>
