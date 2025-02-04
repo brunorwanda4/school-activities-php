@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Check if the username and password match the selected role
     if ($role == 'admin') {
-        $query = "SELECT * FROM admins WHERE username = '$username'";
+        $query = "SELECT  * FROM happy_admins WHERE username = '$username'";
         $result = mysqli_query($happy_conn, $query);
 
         if (mysqli_num_rows($result) > 0) {
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
     } elseif ($role == 'teacher') {
-        $query = "SELECT * FROM teachers WHERE username = '$username'";
+        $query = "SELECT * FROM happy_teachers WHERE username = '$username'";
         $result = mysqli_query($happy_conn, $query);
 
         if (mysqli_num_rows($result) > 0) {
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
     } elseif ($role == 'student') {
-        $query = "SELECT * FROM students WHERE student_id = '$username'";
+        $query = "SELECT * FROM happy_students WHERE student_id = '$username'";
         $result = mysqli_query($happy_conn, $query);
 
         if (mysqli_num_rows($result) > 0) {

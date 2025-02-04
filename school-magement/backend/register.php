@@ -1,9 +1,7 @@
 <?php
 // backend/register.php
 session_start();
-include_once('../backend/config.php');  // Include database connection
-
-// Check if form data is submitted
+$happy_conn = mysqli_connect("localhost", "root", "", "happy_db");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize and collect form data
     $role = mysqli_real_escape_string($happy_conn, $_POST['role']);
@@ -12,11 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Check if email already exists in the selected role table
     if ($role == 'admin') {
-        $sql = "SELECT * FROM admins WHERE username = '$email'";
+        $sql = "SELECT  * FROM happy_admins WHERE username = '$email'";
     } elseif ($role == 'teacher') {
-        $sql = "SELECT * FROM teachers WHERE username = '$email'";
+        $sql = "SELECT * FROM happy_teachers WHERE username = '$email'";
     } elseif ($role == 'student') {
-        $sql = "SELECT * FROM students WHERE student_id = '$email'";
+        $sql = "SELECT * FROM happy_students WHERE student_id = '$email'";
     }
 
     $result = mysqli_query($happy_conn, $sql);
@@ -27,35 +25,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['role'] = $role;
         $_SESSION['email'] = $email;
         if ($role == 'admin') {
-            header('Location: ../admin/dashboard.php');
+            header('Location: ./login.php');
         } elseif ($role == 'teacher') {
-            header('Location: ../teacher/dashboard.php');
+            header('Location: ./login.php');
         } else {
-            header('Location: ../student/dashboard.php');
+            header('Location: ./login.php');
         }
         exit();
     } else {
         // If email does not exist, register the user
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        if ($role == 'admin') {
-            $sql = "INSERT INTO admins (username, password) VALUES ('$email', '$hashed_password')";
-        } elseif ($role == 'teacher') {
-            $sql = "INSERT INTO teachers (username, password) VALUES ('$email', '$hashed_password')";
-        } elseif ($role == 'student') {
-            $sql = "INSERT INTO students (student_id, password) VALUES ('$email', '$hashed_password')";
-        }
+        // if ($role == 'admin') {
+        $sql = "INSERT INTO happy_admins (username, password) VALUES ('$email', '$hashed_password')";
+        // } elseif ($role == 'teacher') {
+        //     $sql = "INSERT INTO teachers (username, password) VALUES ('$email', '$hashed_password')";
+        // } elseif ($role == 'student') {
+        //     $sql = "INSERT INTO students (student_id, password) VALUES ('$email', '$hashed_password')";
+        // }
 
         if (mysqli_query($happy_conn, $sql)) {
             // Redirect to the respective dashboard after registration
             $_SESSION['role'] = $role;
             $_SESSION['email'] = $email;
             if ($role == 'admin') {
-                header('Location: ../admin/dashboard.php');
+                header('Location: ./login.php');
             } elseif ($role == 'teacher') {
-                header('Location: ../teacher/dashboard.php');
+                header('Location: ./login.php');
             } else {
-                header('Location: ../student/dashboard.php');
+                header('Location: ./login.php');
             }
             exit();
         } else {
@@ -74,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body  class="flex w-full ">
+<body class="flex w-full ">
     <div class="w-1/2">
         <img src="../images/15.jpg" alt="School Logo" class=" h-screen w-full object-cover">
     </div>

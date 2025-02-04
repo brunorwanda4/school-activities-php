@@ -9,7 +9,7 @@ if ($_SESSION['user_type'] !== 'admin') {
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $result = mysqli_query($happy_conn, "SELECT * FROM teachers WHERE id = '$id'");
+    $result = mysqli_query($happy_conn, "SELECT * FROM happy_teachers WHERE id = '$id'");
     $teacher = mysqli_fetch_assoc($result);
 }
 

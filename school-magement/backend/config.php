@@ -1,14 +1,14 @@
 <?php
 // backend/config.php
 
-$servername = "localhost"; // Database server
-$username = "root";        // Database username (default for local development)
-$password = "";            // Database password (leave empty for local or provide actual password)
-$dbname = "karine_db"; // Your database name (should match the one you've created)
-
+$servername = "localhost"; 
+$username = "root";        
+$password = "";           
+$dbname = "happy_conn";
 // Create connection
-$happy_conn = mysqli_connect($servername, $username, $password, $dbname);
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
+$happy_conn = mysqli_connect("localhost", "root", "", "happy_db");
 // Check connection
 if (!$happy_conn) {
     die("Connection failed: " . mysqli_connect_error());

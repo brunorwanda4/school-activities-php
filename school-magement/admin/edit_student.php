@@ -9,7 +9,7 @@ if ($_SESSION['user_type'] !== 'admin') {
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $result = mysqli_query($happy_conn, "SELECT * FROM students WHERE id = '$id'");
+    $result = mysqli_query($happy_conn, "SELECT * FROM happy_students WHERE id = '$id'");
     $student = mysqli_fetch_assoc($result);
 }
 
@@ -22,11 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_student'])) {
 
     if (!empty($_POST['password'])) {
         $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $sql = "UPDATE students SET name=?, student_id=?, class=?, other_details=?, password=? WHERE id=?";
+        $sql = "UPDATE happy_students SET name=?, student_id=?, class=?, other_details=?, password=? WHERE id=?";
         $stmt = mysqli_prepare($happy_conn, $sql);
         mysqli_stmt_bind_param($stmt, "sssssi", $name, $student_id, $class, $other_details, $hashed_password, $id);
     } else {
-        $sql = "UPDATE students SET name=?, student_id=?, class=?, other_details=? WHERE id=?";
+        $sql = "UPDATE happy_students SET name=?, student_id=?, class=?, other_details=? WHERE id=?";
         $stmt = mysqli_prepare($happy_conn, $sql);
         mysqli_stmt_bind_param($stmt, "ssssi", $name, $student_id, $class, $other_details, $id);
     }

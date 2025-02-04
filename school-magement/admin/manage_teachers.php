@@ -7,7 +7,7 @@ if ($_SESSION['user_type'] !== 'admin') {
     exit();
 }
 
-$teachers = mysqli_query($happy_conn, "SELECT * FROM teachers");
+$teachers = mysqli_query($happy_conn, "SELECT * FROM happy_teachers");
 ?>
 
 <!DOCTYPE html>
