@@ -4,7 +4,7 @@ include_once('../backend/config.php');  // Include database connection
 
 // Ensure the user is a teacher
 if ($_SESSION['user_type'] !== 'teacher') {
-    header('Location: ../backend/login.php');  // Redirect to login if not teacher
+    header('Location: ../backend/login.php');
     exit();
 }
 
@@ -45,6 +45,7 @@ if (isset($_GET['student_id'])) {
             <thead>
                 <tr class="bg-violet-500 text-white">
                     <th class="p-3 text-left">Student Name</th>
+                    <th class="p-2">Student ID</th>
                     <th class="p-3 text-left">Class</th>
                     <th class="p-3 text-left">Actions</th>
                 </tr>
@@ -53,6 +54,7 @@ if (isset($_GET['student_id'])) {
                 <?php while ($student = mysqli_fetch_assoc($students_result)) { ?>
                     <tr class="border-b">
                         <td class="p-3"> <?php echo $student['name']; ?> </td>
+                        <td class="p-2"><?php echo $student['student_id']; ?></td>  <!-- ✅ FIXED HERE -->
                         <td class="p-3"> <?php echo $student['class']; ?> </td>
                         <td class="p-3">
                             <a href="?student_id=<?php echo $student['student_id']; ?>" class="bg-violet-500 hover:bg-violet-600 text-white px-4 py-2 rounded-md">View Marks</a>

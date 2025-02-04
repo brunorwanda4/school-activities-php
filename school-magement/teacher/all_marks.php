@@ -20,6 +20,7 @@ $marks = mysqli_query($happy_conn, "SELECT * FROM marks WHERE teacher_id = '{$_S
     <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-3xl">
         <h2 class="text-2xl font-bold text-center text-violet-600 mb-4">Marks List</h2>
         <a href="add_marks.php" class="mb-4 inline-block bg-violet-500 hover:bg-violet-600 text-white font-bold py-2 px-4 rounded">Add New Marks</a>
+        <a href="dashboard.php" class="mb-4 inline-block bg-gray-400 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Back in dashboard</a>
         <table class="w-full border-collapse">
             <thead>
                 <tr class="bg-violet-500 text-white">
