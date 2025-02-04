@@ -26,12 +26,12 @@ $result = mysqli_query($happy_conn, $sql);
 
 <body class="bg-gray-100 p-6">
     <div class="max-w-3xl mx-auto bg-white p-6 shadow-md rounded-lg">
-        <h1 class="text-2xl font-bold text-red-600 mb-4">Your Marks</h1>
+        <h1 class="text-2xl font-bold text-violet-600 mb-4">Your Marks</h1>
 
         <!-- Display Marks -->
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white border border-gray-300 shadow-md rounded-md">
-                <thead class="bg-red-500 text-white">
+                <thead class="bg-violet-500 text-white">
                     <tr>
                         <th class="px-4 py-2 text-left">Subject</th>
                         <th class="px-4 py-2 text-left">Marks</th>
@@ -51,7 +51,7 @@ $result = mysqli_query($happy_conn, $sql);
         </div>
 
         <div class="mt-6 text-center">
-            <a href="dashboard.php" class="text-gray-600 hover:text-red-500 font-semibold">Back to Dashboard</a>
+            <a href="dashboard.php" class="text-gray-600 hover:text-violet-500 font-semibold">Back to Dashboard</a>
         </div>
     </div>
 </body>

@@ -73,12 +73,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md border-t-4 border-red-500">
-        <h2 class="text-2xl font-bold text-center text-red-600 mb-6">Register</h2>
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md border-t-4 border-violet-500">
+        <h2 class="text-2xl font-bold text-center text-violet-600 mb-6">Register</h2>
         <form action="register.php" method="POST" class="space-y-4">
             <div>
                 <label for="role" class="block text-gray-600 font-medium">Select Role:</label>
-                <select name="role" required class="w-full p-2 border rounded-md focus:ring focus:ring-red-300">
+                <select name="role" required class="w-full p-2 border rounded-md focus:ring focus:ring-violet-300">
                     <option value="admin">Admin</option>
                     <option value="teacher">Teacher</option>
                     <option value="student">Student</option>
@@ -87,19 +87,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div>
                 <label for="email" class="block text-gray-600 font-medium">Email:</label>
                 <input type="email" name="email" required placeholder="Enter your email" 
-                    class="w-full p-2 border rounded-md focus:ring focus:ring-red-300">
+                    class="w-full p-2 border rounded-md focus:ring focus:ring-violet-300">
             </div>
             <div>
                 <label for="password" class="block text-gray-600 font-medium">Password:</label>
                 <input type="password" name="password" required placeholder="Enter your password" 
-                    class="w-full p-2 border rounded-md focus:ring focus:ring-red-300">
+                    class="w-full p-2 border rounded-md focus:ring focus:ring-violet-300">
             </div>
             <button type="submit" 
-                class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md transition">Register</button>
+                class="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-2 px-4 rounded-md transition">Register</button>
         </form>
         <p class="text-center text-gray-600 mt-4">
             Already have an account? 
-            <a href="./login.php" class="text-red-500 hover:underline">Login</a>
+            <a href="./login.php" class="text-violet-500 hover:underline">Login</a>
         </p>
     </div>
 </body>

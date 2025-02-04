@@ -56,7 +56,7 @@ $result = mysqli_query($happy_conn, "SELECT * FROM modules");
 </head>
 <body class="bg-gray-100 p-8">
     <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h1 class="text-2xl font-bold text-center text-red-600 mb-6">Manage Modules</h1>
+        <h1 class="text-2xl font-bold text-center text-violet-600 mb-6">Manage Modules</h1>
 
         <!-- Add Module Form -->
         <form method="POST" class="space-y-4 mb-6">
@@ -68,14 +68,14 @@ $result = mysqli_query($happy_conn, "SELECT * FROM modules");
                 <input type="checkbox" name="is_active" id="is_active" checked class="mr-2">
                 <label for="is_active" class="text-gray-700">Active</label>
             </div>
-            <button type="submit" name="add_module" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded-md">Add Module</button>
+            <button type="submit" name="add_module" class="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-2 rounded-md">Add Module</button>
         </form>
 
         <!-- Display Modules -->
         <h2 class="text-lg font-semibold text-gray-700 mb-4">Module List</h2>
         <table class="w-full border-collapse bg-white shadow-md rounded-md">
             <thead>
-                <tr class="bg-red-500 text-white">
+                <tr class="bg-violet-500 text-white">
                     <th class="p-3 text-left">ID</th>
                     <th class="p-3 text-left">Module Name</th>
                     <th class="p-3 text-left">Description</th>
@@ -94,7 +94,7 @@ $result = mysqli_query($happy_conn, "SELECT * FROM modules");
                         <td class="p-3"><?php echo $row['is_active'] ? 'Yes' : 'No'; ?></td>
                         <td class="p-3">
                             <a href="?edit=<?php echo $row['id']; ?>" class="text-blue-500 hover:underline">Edit</a> | 
-                            <a href="?delete=<?php echo $row['id']; ?>" class="text-red-500 hover:underline">Delete</a>
+                            <a href="?delete=<?php echo $row['id']; ?>" class="text-violet-500 hover:underline">Delete</a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -116,12 +116,12 @@ $result = mysqli_query($happy_conn, "SELECT * FROM modules");
                     <input type="checkbox" name="is_active" id="is_active" <?php echo $module['is_active'] ? 'checked' : ''; ?> class="mr-2">
                     <label for="is_active" class="text-gray-700">Active</label>
                 </div>
-                <button type="submit" name="edit_module" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded-md">Update Module</button>
+                <button type="submit" name="edit_module" class="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-2 rounded-md">Update Module</button>
             </form>
         <?php } ?>
 
         <div class="mt-6 text-center">
-            <a href="dashboard.php" class="text-gray-600 hover:text-red-500 font-semibold">Back to Dashboard</a>
+            <a href="dashboard.php" class="text-gray-600 hover:text-violet-500 font-semibold">Back to Dashboard</a>
         </div>
     </div>
 </body>

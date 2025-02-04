@@ -20,18 +20,18 @@ if ($_SESSION['user_type'] !== 'student') {
 </head>
 <body class="bg-gray-100 flex items-center justify-center h-screen">
     <div class="max-w-md w-full bg-white p-6 shadow-md rounded-lg text-center">
-        <h1 class="text-2xl font-bold text-red-600">Welcome, Student!</h1>
+        <h1 class="text-2xl font-bold text-violet-600">Welcome, Student!</h1>
         
         <ul class="mt-6 space-y-4">
             <li>
-                <a href="view_marks.php" class="block bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition">
+                <a href="view_marks.php" class="block bg-violet-500 text-white py-2 px-4 rounded-lg hover:bg-violet-600 transition">
                     View Marks
                 </a>
             </li>
         </ul>
 
         <!-- Logout Button -->
-        <a href="../backend/login.php" class="mt-6 inline-block text-red-600 hover:text-red-700 font-semibold">
+        <a href="../backend/login.php" class="mt-6 inline-block text-violet-600 hover:text-violet-700 font-semibold">
             Logout
         </a>
     </div>

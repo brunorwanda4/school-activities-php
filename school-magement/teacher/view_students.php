@@ -36,14 +36,14 @@ if (isset($_GET['student_id'])) {
 <body class="bg-gray-100 p-8">
     <div class="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md">
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold text-red-600">View Students</h1>
-            <a href="../backend/login.php" class="text-red-500 hover:underline">Logout</a>
+            <h1 class="text-2xl font-bold text-violet-600">View Students</h1>
+            <a href="../backend/login.php" class="text-violet-500 hover:underline">Logout</a>
         </div>
 
         <!-- List of Students -->
         <table class="w-full border-collapse bg-white shadow-md rounded-md">
             <thead>
-                <tr class="bg-red-500 text-white">
+                <tr class="bg-violet-500 text-white">
                     <th class="p-3 text-left">Student Name</th>
                     <th class="p-3 text-left">Class</th>
                     <th class="p-3 text-left">Actions</th>
@@ -55,7 +55,7 @@ if (isset($_GET['student_id'])) {
                         <td class="p-3"> <?php echo $student['name']; ?> </td>
                         <td class="p-3"> <?php echo $student['class']; ?> </td>
                         <td class="p-3">
-                            <a href="?student_id=<?php echo $student['student_id']; ?>" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">View Marks</a>
+                            <a href="?student_id=<?php echo $student['student_id']; ?>" class="bg-violet-500 hover:bg-violet-600 text-white px-4 py-2 rounded-md">View Marks</a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -67,7 +67,7 @@ if (isset($_GET['student_id'])) {
                 <h2 class="text-lg font-semibold text-gray-700 mb-3">Marks for <?php echo $student_info['name']; ?></h2>
                 <table class="w-full border-collapse bg-white shadow-md rounded-md">
                     <thead>
-                        <tr class="bg-red-500 text-white">
+                        <tr class="bg-violet-500 text-white">
                             <th class="p-3 text-left">Subject</th>
                             <th class="p-3 text-left">Marks</th>
                             <th class="p-3 text-left">Entry Date</th>
@@ -86,7 +86,7 @@ if (isset($_GET['student_id'])) {
             </div>
         <?php } ?>
         <div class="mt-6 text-center">
-            <a href="dashboard.php" class="text-gray-600 hover:text-red-500 font-semibold">Back to Dashboard</a>
+            <a href="dashboard.php" class="text-gray-600 hover:text-violet-500 font-semibold">Back to Dashboard</a>
         </div>
     </div>
 </body>

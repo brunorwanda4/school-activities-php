@@ -20,7 +20,7 @@ if (isset($_POST['add_marks'])) {
     if (mysqli_query($happy_conn, $sql)) {
         echo "<p class='text-green-500'>Marks added successfully!</p>";
     } else {
-        echo "<p class='text-red-500'>Error: " . mysqli_error($happy_conn) . "</p>";
+        echo "<p class='text-violet-500'>Error: " . mysqli_error($happy_conn) . "</p>";
     }
 }
 
@@ -51,20 +51,20 @@ $result_marks = mysqli_query($happy_conn, $sql_marks);
             
             <div>
                 <label for="student_id" class="block text-gray-600">Student ID</label>
-                <input type="text" name="student_id" required class="w-full border-gray-300 rounded-md p-2 focus:ring focus:ring-red-200" />
+                <input type="text" name="student_id" required class="w-full border-gray-300 rounded-md p-2 focus:ring focus:ring-violet-200" />
             </div>
 
             <div>
                 <label for="subject" class="block text-gray-600">Subject</label>
-                <input type="text" name="subject" required class="w-full border-gray-300 rounded-md p-2 focus:ring focus:ring-red-200" />
+                <input type="text" name="subject" required class="w-full border-gray-300 rounded-md p-2 focus:ring focus:ring-violet-200" />
             </div>
 
             <div>
                 <label for="marks" class="block text-gray-600">Marks</label>
-                <input type="number" name="marks" required class="w-full border-gray-300 rounded-md p-2 focus:ring focus:ring-red-200" />
+                <input type="number" name="marks" required class="w-full border-gray-300 rounded-md p-2 focus:ring focus:ring-violet-200" />
             </div>
 
-            <button type="submit" name="add_marks" class="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition">Save Marks</button>
+            <button type="submit" name="add_marks" class="w-full bg-violet-500 text-white py-2 rounded-md hover:bg-violet-600 transition">Save Marks</button>
         </form>
 
         <!-- Display Marks -->
@@ -93,7 +93,7 @@ $result_marks = mysqli_query($happy_conn, $sql_marks);
         </div>
 
         <div class="mt-6 text-center">
-            <a href="dashboard.php" class="text-gray-600 hover:text-red-500 font-semibold">Back to Dashboard</a>
+            <a href="dashboard.php" class="text-gray-600 hover:text-violet-500 font-semibold">Back to Dashboard</a>
         </div>
     </div>
 </body>

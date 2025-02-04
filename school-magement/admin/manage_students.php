@@ -62,7 +62,7 @@ $result = mysqli_query($happy_conn, "SELECT * FROM students");
 </head>
 <body class="bg-gray-100 p-8">
     <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h1 class="text-2xl font-bold text-center text-red-600 mb-6">Manage Students</h1>
+        <h1 class="text-2xl font-bold text-center text-violet-600 mb-6">Manage Students</h1>
 
         <!-- Add Student Form -->
         <form method="POST" class="space-y-4 mb-6">
@@ -72,14 +72,14 @@ $result = mysqli_query($happy_conn, "SELECT * FROM students");
             <input type="text" name="class" placeholder="Class" required class="w-full p-2 border rounded-md">
             <textarea name="other_details" placeholder="Other Details" class="w-full p-2 border rounded-md"></textarea>
             <input type="password" name="password" placeholder="Password" required class="w-full p-2 border rounded-md">
-            <button type="submit" name="add_student" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded-md">Add Student</button>
+            <button type="submit" name="add_student" class="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-2 rounded-md">Add Student</button>
         </form>
 
         <!-- Display Students -->
         <h2 class="text-lg font-semibold text-gray-700 mb-4">Student List</h2>
         <table class="w-full border-collapse bg-white shadow-md rounded-md">
             <thead>
-                <tr class="bg-red-500 text-white">
+                <tr class="bg-violet-500 text-white">
                     <th class="p-3 text-left">ID</th>
                     <th class="p-3 text-left">Name</th>
                     <th class="p-3 text-left">Student ID</th>
@@ -96,7 +96,7 @@ $result = mysqli_query($happy_conn, "SELECT * FROM students");
                         <td class="p-3"><?php echo $row['class']; ?></td>
                         <td class="p-3">
                             <a href="?edit=<?php echo $row['id']; ?>" class="text-blue-500 hover:underline">Edit</a> | 
-                            <a href="?delete=<?php echo $row['id']; ?>" class="text-red-500 hover:underline">Delete</a>
+                            <a href="?delete=<?php echo $row['id']; ?>" class="text-violet-500 hover:underline">Delete</a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -116,11 +116,11 @@ $result = mysqli_query($happy_conn, "SELECT * FROM students");
                 <input type="text" name="class" value="<?php echo $student['class']; ?>" required class="w-full p-2 border rounded-md">
                 <textarea name="other_details" class="w-full p-2 border rounded-md"><?php echo $student['other_details']; ?></textarea>
                 <input type="password" name="password" placeholder="New Password (Leave blank to keep current password)" class="w-full p-2 border rounded-md">
-                <button type="submit" name="edit_student" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded-md">Update Student</button>
+                <button type="submit" name="edit_student" class="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-2 rounded-md">Update Student</button>
             </form>
         <?php } ?>
         <div class="mt-6 text-center">
-            <a href="dashboard.php" class="text-gray-600 hover:text-red-500 font-semibold">Back to Dashboard</a>
+            <a href="dashboard.php" class="text-gray-600 hover:text-violet-500 font-semibold">Back to Dashboard</a>
         </div>
     </div>
 </body>
