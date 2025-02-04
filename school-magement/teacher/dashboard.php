@@ -23,7 +23,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'teacher') {
 
         <ul class="space-y-4 text-center">
             <li>
-                <a href="marks_entry.php"class="text-violet-500 hover:underline font-medium">Enter Marks</a>
+                <a href="all_marks.php"class="text-violet-500 hover:underline font-medium">Enter Marks</a>
             </li>
             <li>
                 <a href="view_students.php"class="text-violet-500 hover:underline font-medium">View Students</a>

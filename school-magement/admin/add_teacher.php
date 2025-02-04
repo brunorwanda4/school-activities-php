@@ -33,7 +33,8 @@ if (isset($_POST['add_teacher'])) {
     <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
         <h2 class="text-2xl font-bold text-center text-violet-600 mb-4">Add New Teacher</h2>
         <form method="POST" class="space-y-4">
-            <input type="text" name="name" placeholder="Name" required class="w-full border p-2 rounded">
+            <label for="name">Name</label>
+            <input id="name" type="text" name="name" placeholder="Name" required class="w-full border p-2 rounded">
             <input type="text" name="subject" placeholder="Subject" required class="w-full border p-2 rounded">
             <input type="text" name="username" placeholder="Username" required class="w-full border p-2 rounded">
             <input type="password" name="password" placeholder="Password" required class="w-full border p-2 rounded">
