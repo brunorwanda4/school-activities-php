@@ -46,15 +46,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_student'])) {
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
     <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
         <h2 class="text-2xl font-bold text-center text-violet-600 mb-4">Edit Student</h2>
+        
         <form method="POST" class="space-y-4">
             <input type="hidden" name="id" value="<?php echo $student['id']; ?>">
-            <input type="text" name="name" value="<?php echo $student['name']; ?>" required class="w-full border p-2 rounded">
-            <input type="text" name="student_id" value="<?php echo $student['student_id']; ?>" required class="w-full border p-2 rounded">
-            <input type="text" name="class" value="<?php echo $student['class']; ?>" required class="w-full border p-2 rounded">
-            <textarea name="other_details" class="w-full border p-2 rounded"><?php echo $student['other_details']; ?></textarea>
-            <input type="password" name="password" placeholder="New Password (optional)" class="w-full border p-2 rounded">
+
+            <div>
+                <label for="name" class="block text-gray-700 font-medium">Student Name</label>
+                <input id="name" type="text" name="name" value="<?php echo $student['name']; ?>" required class="w-full border p-2 rounded focus:ring focus:ring-violet-200">
+            </div>
+
+            <div>
+                <label for="student_id" class="block text-gray-700 font-medium">Student ID</label>
+                <input id="student_id" type="text" name="student_id" value="<?php echo $student['student_id']; ?>" required class="w-full border p-2 rounded focus:ring focus:ring-violet-200">
+            </div>
+
+            <div>
+                <label for="class" class="block text-gray-700 font-medium">Class</label>
+                <input id="class" type="text" name="class" value="<?php echo $student['class']; ?>" required class="w-full border p-2 rounded focus:ring focus:ring-violet-200">
+            </div>
+
+            <div>
+                <label for="other_details" class="block text-gray-700 font-medium">Other Details</label>
+                <textarea id="other_details" name="other_details" class="w-full border p-2 rounded focus:ring focus:ring-violet-200"><?php echo $student['other_details']; ?></textarea>
+            </div>
+
+            <div>
+                <label for="password" class="block text-gray-700 font-medium">New Password (Optional)</label>
+                <input id="password" type="password" name="password" placeholder="Enter new password (leave blank to keep existing password)" class="w-full border p-2 rounded focus:ring focus:ring-violet-200">
+            </div>
+
             <button type="submit" name="edit_student" class="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-2 rounded">Update Student</button>
         </form>
+
         <div class="mt-4 text-center">
             <a href="manage_students.php" class="text-gray-600 hover:text-violet-500 font-semibold">Back to Students List</a>
         </div>

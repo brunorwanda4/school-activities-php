@@ -39,17 +39,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_module'])) {
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
     <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
         <h2 class="text-2xl font-bold text-center text-violet-600 mb-4">Edit Module</h2>
+        
         <form method="POST" class="space-y-4">
             <input type="hidden" name="id" value="<?php echo $module['id']; ?>">
-            <input type="text" name="module_name" value="<?php echo $module['module_name']; ?>" required class="w-full border p-2 rounded">
-            <textarea name="description" class="w-full border p-2 rounded"><?php echo $module['description']; ?></textarea>
-            <input type="text" name="parent_module_id" value="<?php echo $module['parent_module_id']; ?>" placeholder="Parent Module ID (optional)" class="w-full border p-2 rounded">
+
+            <div>
+                <label for="module_name" class="block text-gray-700 font-medium">Module Name</label>
+                <input id="module_name" type="text" name="module_name" value="<?php echo $module['module_name']; ?>" required class="w-full border p-2 rounded focus:ring focus:ring-violet-200">
+            </div>
+
+            <div>
+                <label for="description" class="block text-gray-700 font-medium">Description</label>
+                <textarea id="description" name="description" class="w-full border p-2 rounded focus:ring focus:ring-violet-200"><?php echo $module['description']; ?></textarea>
+            </div>
+
+            <div>
+                <label for="parent_module_id" class="block text-gray-700 font-medium">Parent Module ID (Optional)</label>
+                <input id="parent_module_id" type="text" name="parent_module_id" value="<?php echo $module['parent_module_id']; ?>" class="w-full border p-2 rounded focus:ring focus:ring-violet-200">
+            </div>
+
             <div class="flex items-center">
                 <input type="checkbox" name="is_active" id="is_active" <?php echo $module['is_active'] ? 'checked' : ''; ?> class="mr-2">
                 <label for="is_active" class="text-gray-700">Active</label>
             </div>
+
             <button type="submit" name="edit_module" class="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-2 rounded">Update Module</button>
         </form>
+
         <div class="mt-4 text-center">
             <a href="manage_modules.php" class="text-gray-600 hover:text-violet-500 font-semibold">Back to Modules List</a>
         </div>
