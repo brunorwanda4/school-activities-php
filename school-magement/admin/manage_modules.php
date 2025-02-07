@@ -7,7 +7,7 @@ if ($_SESSION['user_type'] !== 'admin') {
     exit();
 }
 
-$modules = mysqli_query($happy_conn, "SELECT * FROM modules");
+$modules = mysqli_query($happy_conn, "SELECT * FROM happy_modules");
 ?>
 
 <!DOCTYPE html>
